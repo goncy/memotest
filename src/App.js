@@ -102,10 +102,13 @@ class App extends Component {
   }
 
   render () {
-    const {cards, revealed, firstPick, secondPick} = this.state
+    const {cards, revealed, firstPick, secondPick, level} = this.state
 
     return (
-      <div className='App'>
+      <div className='App min-vh-100 h-100'>
+        <p className='pv3 center tc f2 helvetica ma0 b'>
+          Nivel <span className='light-green'>{level}</span>
+        </p>
         <Board
           cards={cards}
           revealed={revealed}

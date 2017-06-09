@@ -1,10 +1,11 @@
 import React from 'react'
 import { compose, withHandlers } from 'recompose'
+import PropTypes from 'prop-types'
 
 import Card from '../Card'
 
 export const Board = ({cards, getCardOnClickHandler, getCardStatus, getShouldShowCard}) => (
-  <div className='Board min-vh-100 h-100 flex mw8 justify-center items-center center'>
+  <div className='Board h-100 flex mw9 justify-center items-center center'>
     <div className='flex flex-wrap justify-center'>
       {cards.map((card, key) => (
         <Card
@@ -18,6 +19,16 @@ export const Board = ({cards, getCardOnClickHandler, getCardStatus, getShouldSho
     </div>
   </div>
 )
+
+Board.propTypes = {
+  cards: PropTypes.arrayOf(PropTypes.shape({
+    icon: PropTypes.string,
+    type: PropTypes.string
+  })),
+  getCardOnClickHandler: PropTypes.func,
+  getCardStatus: PropTypes.func,
+  getShouldShowCard: PropTypes.func
+}
 
 export const BoardHOC = compose(
   withHandlers({
