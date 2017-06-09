@@ -105,7 +105,7 @@ class App extends Component {
     const {cards, revealed, firstPick, secondPick, level} = this.state
 
     return (
-      <div className='App min-vh-100 h-100'>
+      <div className='App min-vh-100 h-100 flex flex-column justify-center items-center'>
         <p className='pv3 center tc f2 helvetica ma0 b'>
           Nivel <span className='light-green'>{level}</span>
         </p>
