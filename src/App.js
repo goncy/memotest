@@ -6,8 +6,8 @@ import Board from './components/Board'
 
 import './App.css'
 
-const INITAL_CARDS_COUNT = 2
-const INITIAL_LEVEL = 1
+const CARDS_PER_LEVEL = 2
+const INITIAL_LEVEL = 75
 
 class App extends Component {
   constructor () {
@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   getCardsForLevel (level) {
-    const cards = this.shuffleCards(ICONS).slice(0, level * INITAL_CARDS_COUNT)
+    const cards = this.shuffleCards(ICONS).slice(0, level * CARDS_PER_LEVEL)
 
     const Acards = cards.map(card => ({icon: card, type: 'a'}))
     const Bcards = cards.map(card => ({icon: card, type: 'b'}))
