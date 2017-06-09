@@ -1,0 +1,26 @@
+.Card {
+  transition: all .40s !important;
+  max-width: 16rem;
+  max-height: 13rem;
+  backface-visibility: visible;
+  transform: rotateY(0deg);
+}
+
+.Card.flipped {
+  transform: rotateY(180deg);
+}
+
+.Card .fa {
+  transform: rotateY(180deg);
+  transition: all 0s !important;
+  transition-delay: 0.20s;
+  font-size: 3rem;
+}
+
+.Card .fa.fa-question {
+  transform: rotateY(0deg);
+}
+
+.Card.flipped .fa.fa-question {
+  transform: rotateY(180deg);
+}
