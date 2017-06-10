@@ -118,9 +118,9 @@ class App extends Component {
 
     return (
       <div className='App vh-100 w-100'>
-        <div className='pv3 center f2 helvetica ma0 b'>
+        <p className='pv2 center f3 helvetica ma0 b'>
           Nivel <span className='light-green'>{level}</span> - Puntos: <span className='light-green'>{points}</span>
-        </div>
+        </p>
         <Board
           cards={cards}
           revealed={revealed}
