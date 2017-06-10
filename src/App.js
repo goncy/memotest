@@ -15,6 +15,8 @@ class App extends Component {
 
     this.state = {
       level: INITIAL_LEVEL,
+      levelStart: Date.now(),
+      points: 0,
       cards: this.getCardsForLevel(INITIAL_LEVEL),
       revealed: [],
       firstPick: null,
@@ -69,12 +71,14 @@ class App extends Component {
   }
 
   checkWin (revealed) {
-    const {cards, level} = this.state
+    const {cards, level, levelStart} = this.state
 
     if (revealed.length === cards.length) {
       setTimeout(() => {
         this.setState({
           level: level + 1,
+          levelStart: Date.now() + 1000,
+          points: this.getPoints(Date.now() - levelStart),
           cards: this.getCardsForLevel(level + 1),
           revealed: [],
           firstPick: null,
@@ -82,6 +86,14 @@ class App extends Component {
         })
       }, 1000)
     }
+  }
+
+  getPoints (ms) {
+    const {points: previousPoints, level} = this.state
+
+    const levelPoints = Math.round(((((CARDS_PER_LEVEL * level) * 10000) - ms) * level) / 4)
+
+    return previousPoints + (levelPoints < 0 ? 0 : levelPoints)
   }
 
   shuffleCards (array) {
@@ -102,12 +114,12 @@ class App extends Component {
   }
 
   render () {
-    const {cards, revealed, firstPick, secondPick, level} = this.state
+    const {cards, revealed, firstPick, secondPick, level, points} = this.state
 
     return (
       <div className='App vh-100 w-100'>
         <div className='pv3 center f2 helvetica ma0 b'>
-          Nivel <span className='light-green'>{level}</span>
+          Nivel <span className='light-green'>{level}</span> - Puntos: <span className='light-green'>{points}</span>
         </div>
         <Board
           cards={cards}
