@@ -7,7 +7,7 @@ import Board from './components/Board'
 import './App.css'
 
 const CARDS_PER_LEVEL = 2
-const INITIAL_LEVEL = 75
+const INITIAL_LEVEL = 1
 
 class App extends Component {
   constructor () {
@@ -105,10 +105,10 @@ class App extends Component {
     const {cards, revealed, firstPick, secondPick, level} = this.state
 
     return (
-      <div className='App min-vh-100 h-100 flex flex-column justify-center items-center'>
-        <p className='pv3 center tc f2 helvetica ma0 b'>
+      <div className='App vh-100 w-100'>
+        <div className='pv3 center f2 helvetica ma0 b'>
           Nivel <span className='light-green'>{level}</span>
-        </p>
+        </div>
         <Board
           cards={cards}
           revealed={revealed}

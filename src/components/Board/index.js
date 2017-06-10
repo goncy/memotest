@@ -7,7 +7,7 @@ import Card from '../Card'
 import './Board.css'
 
 export const Board = ({cards, getCardOnClickHandler, getCardStatus, getShouldShowCard}) => (
-  <div className='Board h-100 flex mw9 justify-center items-center center'>
+  <div className='Board center'>
     <div className='flex flex-wrap justify-center'>
       {cards.map((card, key) => (
         <Card

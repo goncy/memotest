@@ -4,14 +4,25 @@ import { compose, mapProps } from 'recompose'
 
 import './Card.css'
 
-export const Card = ({onClick, styles}) => (
+export const Card = ({onClick, styles, icon, shown}) => (
   <article
-    className={`Card mw5 bg-white br3 pa3 ma1 ${styles.card}`}
+    className={`Card mw5 bg-white br3 pa3 ma1 ${styles.card} ${shown && 'flipped'}`}
     onClick={onClick}
   >
-    <div className='tc flex justify-center items-center'>
-      <div className={`br-100 h4 w4 ba pa2 flex justify-center items-center ${styles.circle}`}>
-        <i className={styles.icon} />
+    <div className='flipper'>
+      <div className='front'>
+        <div className='tc flex justify-center items-center'>
+          <div className='br-100 h4 w4 ba pa2 flex justify-center items-center b--black-10'>
+            <i className='black fa fa-question' />
+          </div>
+        </div>
+      </div>
+      <div className='back'>
+        <div className='tc flex justify-center items-center'>
+          <div className='br-100 h4 w4 ba pa2 flex justify-center items-center b--white'>
+            <i className={`white fa fa-${icon}`} />
+          </div>
+        </div>
       </div>
     </div>
   </article>
@@ -19,7 +30,9 @@ export const Card = ({onClick, styles}) => (
 
 Card.propTypes = {
   onClick: PropTypes.func,
-  styles: PropTypes.object
+  styles: PropTypes.object,
+  icon: PropTypes.string,
+  shown: PropTypes.bool
 }
 
 export const CardHOC = compose(
@@ -29,57 +42,36 @@ export const CardHOC = compose(
     switch (status) {
       case 'unmatched':
         styles = {
-          card: 'bg-light-red ba b--white',
-          circle: 'b--white',
-          icon: 'white'
+          card: 'bg-light-red ba b--white'
         }
         break
       case 'picked':
         styles = {
-          card: 'bg-light-blue ba b--white',
-          circle: 'b--white',
-          icon: 'white'
+          card: 'bg-light-blue ba b--white'
         }
         break
       case 'revealed':
         styles = {
-          card: 'bg-light-green ba b--white',
-          circle: 'b--white',
-          icon: 'white'
+          card: 'bg-light-green ba b--white'
         }
         break
       case 'disabled':
         styles = {
-          card: 'ba b--black-10',
-          circle: 'b--black-10',
-          icon: 'black'
+          card: 'ba b--black-10'
         }
         break
       default:
         styles = {
-          card: 'hover-bg-light-gray grow pointer ba b--black-10',
-          circle: 'b--black-10',
-          icon: 'black'
+          card: 'hover-bg-light-gray grow pointer ba b--black-10'
         }
         break
     }
 
-    if (shown) {
-      styles = {
-        ...styles,
-        card: styles.card + ' flipped',
-        icon: styles.icon + ` fa fa-${icon}`
-      }
-    } else {
-      styles = {
-        ...styles,
-        icon: styles.icon + ' fa fa-question'
-      }
-    }
-
     return {
       styles,
-      onClick
+      onClick,
+      shown,
+      icon
     }
   })
 )
